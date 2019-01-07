@@ -1,0 +1,269 @@
+openapi: 3.0.0
+info:
+  title: Spring Boot REST API
+  description: '"Spring Boot REST API for Online Store"'
+  contact:
+    name: Raphael Bickel
+    url: http://aka.ms/TDCCODE
+    email: rbickel@microsoft.com
+  license:
+    name: Apache License Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0"
+  version: 1.0.0-oas3
+servers:
+- url: //40.118.107.186/
+tags:
+- name: product-controller
+  description: Operations pertaining to products in Online Store
+paths:
+  /product/add:
+    post:
+      tags:
+      - product-controller
+      summary: Add a product
+      operationId: saveProductUsingPOST
+      requestBody:
+        $ref: '#/components/requestBodies/Product'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        201:
+          description: Created
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+  /product/delete/{id}:
+    delete:
+      tags:
+      - product-controller
+      summary: Delete a product
+      operationId: deleteUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntity'
+        204:
+          description: No Content
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden
+  /product/list:
+    get:
+      tags:
+      - product-controller
+      summary: View a list of available products
+      operationId: listUsingGET
+      responses:
+        200:
+          description: Successfully retrieved list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Iterable'
+        401:
+          description: You are not authorized to view the resource
+        403:
+          description: Accessing the resource you were trying to reach is forbidden
+        404:
+          description: The resource you were trying to reach is not found
+  /product/show/{id}:
+    get:
+      tags:
+      - product-controller
+      summary: Search a product with an ID
+      operationId: showProductUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+  /product/update/{id}:
+    put:
+      tags:
+      - product-controller
+      summary: Update a product
+      operationId: updateProductUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        $ref: '#/components/requestBodies/Product'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        201:
+          description: Created
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+components:
+  schemas:
+    Iterable:
+      title: Iterable
+      type: object
+    Product:
+      title: Product
+      required:
+      - price
+      type: object
+      properties:
+        description:
+          type: string
+          description: The product description
+        id:
+          type: integer
+          description: The database generated product IDe
+          format: int32
+        imageUrl:
+          type: string
+          description: The image URL of the product
+        price:
+          type: number
+          description: The price of the product
+        productId:
+          type: string
+          description: The application-specific product ID
+        version:
+          type: integer
+          description: The auto-generated version of the product
+          format: int32
+    ResponseEntity:
+      title: ResponseEntity
+      type: object
+      properties:
+        body:
+          type: object
+        statusCode:
+          type: string
+          enum:
+          - "100"
+          - "101"
+          - "102"
+          - "103"
+          - "200"
+          - "201"
+          - "202"
+          - "203"
+          - "204"
+          - "205"
+          - "206"
+          - "207"
+          - "208"
+          - "226"
+          - "300"
+          - "301"
+          - "302"
+          - "303"
+          - "304"
+          - "305"
+          - "307"
+          - "308"
+          - "400"
+          - "401"
+          - "402"
+          - "403"
+          - "404"
+          - "405"
+          - "406"
+          - "407"
+          - "408"
+          - "409"
+          - "410"
+          - "411"
+          - "412"
+          - "413"
+          - "414"
+          - "415"
+          - "416"
+          - "417"
+          - "418"
+          - "419"
+          - "420"
+          - "421"
+          - "422"
+          - "423"
+          - "424"
+          - "426"
+          - "428"
+          - "429"
+          - "431"
+          - "451"
+          - "500"
+          - "501"
+          - "502"
+          - "503"
+          - "504"
+          - "505"
+          - "506"
+          - "507"
+          - "508"
+          - "509"
+          - "510"
+          - "511"
+        statusCodeValue:
+          type: integer
+          format: int32
+    Iterable_Product_:
+      title: Iterable«Product»
+      type: object
+  requestBodies:
+    Product:
+      description: product
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Product'
+      required: true
