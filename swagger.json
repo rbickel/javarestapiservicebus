@@ -6,8 +6,8 @@
     "title" : "TDC 2019 REST API",
     "contact" : {
       "name" : "Raphael Bickel",
-      "url" : "https://aka.ms/tdcworkshop",
-      "email" : "rbickel@microsoft.com"
+      "url" : "https://aka.ms/TDCCODE",
+      "email" : "rabickel@microsoft.com"
     }
   },
   "basePath" : "/",
