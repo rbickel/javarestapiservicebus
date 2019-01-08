@@ -10,7 +10,6 @@
       "email" : "rbickel@microsoft.com"
     }
   },
-  "host" : "http://40.118.107.186",
   "basePath" : "/",
   "tags" : [ {
     "name" : "product-controller",
