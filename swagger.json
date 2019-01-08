@@ -1,9 +1,9 @@
 {
   "swagger" : "2.0",
   "info" : {
-    "description" : "\"Spring Boot REST API for Online Store\"",
+    "description" : "\"TDC 2019 REST API for Online Store\"",
     "version" : "1.0.0",
-    "title" : "Spring Boot REST API",
+    "title" : "TDC 2019 REST API",
     "contact" : {
       "name" : "Raphael Bickel",
       "url" : "https://aka.ms/tdcworkshop",
