@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: javarestapilb
+spec:
+  type: LoadBalancer
+  ports:
+  - name: mainendpoint
+    port: 80
+    targetPort: main
+    protocol: TCP
+  selector:
+    app: javarestapi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: javarestapi-deployment
+  labels:
+    app: javarestapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: javarestapi
+  template:
+    metadata:
+      labels:
+        app: javarestapi
+    spec:
+      containers:
+      - image: nemesis1203/javarestapiservicebus:latest
+        name: javarestapi
+        env:
+        - name: SERVICEBUSCONNECTION
+          value: "Endpoint=sb://rabickel-test.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=AdAnyzF/ub+YAV2XjoXUtzkZuHHX9CUN2QbUoQVaNYU="
+        ports:
+        - containerPort: 8080
+          name: main
